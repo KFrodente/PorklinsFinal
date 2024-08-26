@@ -35,27 +35,29 @@ void AWorldCamera::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+	float DT = GetWorld()->GetDeltaSeconds();
+
 	if (FollowPlayer)
 	{
 		SetActorLocation(FVector
-			( FMath::FInterpTo(GetActorLocation().X, PlayerRef->GetActorLocation().X, GetWorld()->GetDeltaSeconds(), HorizontalLerpTime)  //set camera x position
+			( FMath::FInterpTo(GetActorLocation().X, PlayerRef->GetActorLocation().X, DT, HorizontalLerpTime)  //set camera x position
 			, 100.0f
-			, FMath::FInterpTo(GetActorLocation().Z, PlayerRef->GetActorLocation().Z, GetWorld()->GetDeltaSeconds(), VerticalLerpTime))); //set camera z position
+			, FMath::FInterpTo(GetActorLocation().Z, PlayerRef->GetActorLocation().Z, DT, VerticalLerpTime))); //set camera z position
 		
-		SetActorRotation(FRotator(0.0f, -90 - FMath::FInterpTo(GetActorRotation().Pitch, 0.0f, GetWorld()->GetDeltaSeconds(), 15.0f), 0.0f));
+		SetActorRotation(FRotator(0.0f, -90 - FMath::FInterpTo(GetActorRotation().Pitch, 0.0f, DT, 15.0f), 0.0f));
 
-		Camera->SetOrthoWidth(FMath::FInterpTo(Camera->OrthoWidth, 2500, GetWorld()->GetDeltaSeconds(), 15));
+		Camera->SetOrthoWidth(FMath::FInterpTo(Camera->OrthoWidth, 2500, DT, 15));
 	}
 	else
 	{
 		SetActorLocation(FVector
-			( FMath::FInterpTo(GetActorLocation().X, CurrentWantedPosition.X, GetWorld()->GetDeltaSeconds(), HorizontalLerpTime)  //set camera x position
+			( FMath::FInterpTo(GetActorLocation().X, CurrentWantedPosition.X, DT, HorizontalLerpTime)  //set camera x position
 			, 100.0f
-			, FMath::FInterpTo(GetActorLocation().Z, CurrentWantedPosition.Z, GetWorld()->GetDeltaSeconds(), VerticalLerpTime))); //set camera z position
+			, FMath::FInterpTo(GetActorLocation().Z, CurrentWantedPosition.Z, DT, VerticalLerpTime))); //set camera z position
 		
-		SetActorRotation(FRotator(0.0f, -90 - FMath::FInterpTo(GetActorRotation().Pitch, CurrentWantedRotation, GetWorld()->GetDeltaSeconds(), 1), 0.0f));
+		SetActorRotation(FRotator(0.0f, -90 - FMath::FInterpTo(GetActorRotation().Pitch, CurrentWantedRotation, DT, 3), 0.0f));
 
-		Camera->SetOrthoWidth(FMath::FInterpTo(Camera->OrthoWidth, CurrentWantedZoom, GetWorld()->GetDeltaSeconds(), 15));
+		Camera->SetOrthoWidth(FMath::FInterpTo(Camera->OrthoWidth, CurrentWantedZoom, DT, 15));
 	}
 
 }
