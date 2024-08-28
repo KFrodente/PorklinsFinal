@@ -37,11 +37,14 @@ public:
 	float VerticalLerpTime = 20.0f;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	bool FollowPlayer = true;
+
+	FVector ShakeWantedPosition{ 0,0,0 };
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
 	UFUNCTION(BlueprintCallable)
 	void GiveWantedValues(FVector playerLocation, FVector enemyLocation, float wantedZoom);
+
 
 private:
 	UPROPERTY(VisibleAnywhere)
