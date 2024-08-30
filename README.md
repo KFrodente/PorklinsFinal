@@ -1,6 +1,4 @@
-# PorklinsFinal
-
-SOLAR SAMURAI
+# SOLAR SAMURAI
 
 This is a game where you play as an astronaut samurai with a grappling hook, cutting your way through enemies to get to the end of the ship and kill the captain
 
